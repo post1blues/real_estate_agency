@@ -65,8 +65,18 @@ class Owner(models.Model):
 
 
 class Complaint(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='кто жаловался')
-    flat = models.ForeignKey(Flat, on_delete=models.CASCADE, verbose_name='кавартира, на которую пожаловались')
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name='user_complaints',
+        verbose_name='кто жаловался'
+    )
+    flat = models.ForeignKey(
+        Flat,
+        on_delete=models.CASCADE,
+        related_name='flat_complaints',
+        verbose_name='кавартира, на которую пожаловались'
+    )
     message = models.TextField('текст жалобы')
     created_at = models.DateTimeField(default=timezone.now)
 
